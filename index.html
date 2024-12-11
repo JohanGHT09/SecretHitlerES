@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Hitler - Narración</title>
+    <style>
+        @font-face {
+            font-family: 'Truetypewriter';
+            src: url('Truetypewriter.ttf') format('truetype');
+        }
+
+        body {
+            font-family: 'Truetypewriter', monospace; /* Fuente estilo máquina de escribir personalizada */
+            background-color: #f2654a; /* Fondo naranja */
+            color: #fff; /* Texto blanco */
+            text-align: center;
+            padding: 20px;
+            border: 2px solid black; /* Marco negro delgado */
+            margin: 10px auto;
+            max-width: 700px; /* Limita el ancho en pantallas grandes */
+        }
+        img {
+            max-width: 25%; /* Imagen más grande en pantallas grandes */
+            height: auto;
+            margin-bottom: 10px;
+        }
+        h1 {
+            display: none; /* Ocultamos el título textual para SEO */
+        }
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+            margin-bottom: 30px; /* Separación adicional */
+        }
+        .audio-button {
+            font-size: 1rem;
+            padding: 15px 20px;
+            border: 2px solid #fff;
+            border-radius: 5px;
+            background-color: #f2654a;
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+            font-family: 'Courier New', Courier, monospace; /* Fuente estilo máquina de escribir para los botones */
+            display: flex;
+            justify-content: center; /* Centrar el texto */
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra ligera */
+        }
+        .audio-button:hover {
+            background-color: #fff;
+            color: #f2654a;
+            border-color: #000;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Sombra más intensa */
+        }
+        .audio-button.active {
+            background-color: #000;
+            color: #f2654a;
+            border-color: #fff;
+        }
+        .audio-button:active {
+            transform: scale(0.95); /* Efecto de presionado */
+        }
+        .control-buttons {
+            display: flex;
+            justify-content: space-around; /* Espaciado uniforme */
+            align-items: center;
+            gap: 20px; /* Espaciado entre botones */
+            margin-top: 15px;
+        }
+        .control-button {
+            background-color: transparent;
+            cursor: pointer;
+            border: none; /* Elimina el borde predeterminado */
+            outline: none; /* Elimina el contorno al hacer clic */
+            padding: 0; /* Elimina el espacio alrededor */
+        }
+        .control-button img {
+            width: 70px; /* Tamaño ideal para pantallas grandes */
+            height: auto;
+            object-fit: contain; /* Evita distorsión de las imágenes */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra ligera */
+        }
+        .control-button:hover img {
+            transform: scale(1.1); /* Efecto de zoom al pasar el mouse */
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Sombra más intensa */
+        }
+        footer {
+            margin-top: 50px;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 900px) {
+            body {
+                margin: 10px;
+                max-width: 90%; /* Ancho dinámico en pantallas medianas */
+            }
+            img {
+                max-width: 40%; /* Logo ligeramente más grande en pantallas medianas */
+            }
+            h2 {
+                font-size: 1.3rem; /* Título más pequeño */
+            }
+            .control-buttons {
+                gap: 15px; /* Menor separación */
+            }
+            .control-button img {
+                width: 60px; /* Tamaño más pequeño para pantallas medianas */
+            }
+        }
+        @media (max-width: 600px) {
+            img {
+                max-width: 60%; /* Logo más grande en móviles */
+            }
+            .button-container {
+                gap: 10px;
+            }
+            .audio-button {
+                font-size: 0.9rem; /* Texto más pequeño */
+                padding: 10px 15px; /* Botones más compactos */
+            }
+            .control-buttons {
+                flex-direction: row; /* Alinear botones horizontalmente */
+                gap: 10px;
+            }
+            .control-button img {
+                width: 50px; /* Tamaño adecuado para pantallas pequeñas */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Título en imagen -->
+    <img src="SH.png" alt="Secret Hitler Logo" style="margin-bottom: 30px;">
+    <h1>Secret Hitler - Narración</h1>
+
+    <div class="button-container">
+        <button class="audio-button" onclick="playAudio('audio1')">5 - 6 Jugadores</button>
+        <button class="audio-button" onclick="playAudio('audio2')">7 - 8 Jugadores</button>
+        <button class="audio-button" onclick="playAudio('audio3')">9 - 10 Jugadores</button>
+    </div>
+
+    <div class="control-buttons">
+        <button class="control-button" onclick="pauseAudio()">
+            <img src="Pause.png" alt="Pausa">
+        </button>
+        <button class="control-button" onclick="resumeAudio()">
+            <img src="Play.png" alt="Continuar">
+        </button>
+        <button class="control-button" onclick="stopAudio()">
+            <img src="Stop.png" alt="Detener">
+        </button>
+    </div>
+
+    <!-- Archivos de audio -->
+    <audio id="audio1" src="5-6.mp3"></audio>
+    <audio id="audio2" src="7-8.mp3"></audio>
+    <audio id="audio3" src="9-10.mp3"></audio>
+
+    <footer>
+        &copy; 2024 Creado por JohanGHT
+    </footer>
+
+    <script>
+        let lastPlayedAudio = null;
+
+        function playAudio(audioId) {
+            // Quitar clase activa de otros botones
+            document.querySelectorAll('.audio-button').forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Agregar clase activa al botón clicado
+            const activeButton = document.querySelector(`.audio-button[onclick="playAudio('${audioId}')"]`);
+            if (activeButton) activeButton.classList.add('active');
+
+            // Detener todos los audios primero
+            document.querySelectorAll('audio').forEach(audio => {
+                audio.pause();
+                audio.currentTime = 0;
+            });
+
+            // Reproducir el audio seleccionado
+            const audio = document.getElementById(audioId);
+            audio.play();
+            lastPlayedAudio = audio;
+        }
+
+        function pauseAudio() {
+            // Pausar el último audio reproducido
+            if (lastPlayedAudio) {
+                lastPlayedAudio.pause();
+            }
+        }
+
+        function stopAudio() {
+            // Detener todos los audios
+            document.querySelectorAll('audio').forEach(audio => {
+                audio.pause();
+                audio.currentTime = 0;
+            });
+            lastPlayedAudio = null;
+        }
+
+        function resumeAudio() {
+            // Continuar el último audio pausado
+            if (lastPlayedAudio && lastPlayedAudio.paused) {
+                lastPlayedAudio.play();
+            }
+        }
+    </script>
+</body>
+</html>
